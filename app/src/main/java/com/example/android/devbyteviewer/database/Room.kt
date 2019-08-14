@@ -16,3 +16,20 @@
  */
 
 package com.example.android.devbyteviewer.database
+
+import androidx.lifecycle.LiveData
+import androidx.room.*
+
+@Dao
+interface VideoDao {
+    @Query("select * from databaseVideo")
+    fun getVideos(): LiveData<List<DatabaseVideo>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun InsertAll(vararg videos: DatabaseVideo)
+}
+
+@Database(entities = "[DatabaseVideo]", version = 1)
+abstract class VideosDatabase: RoomDatabase() {
+    abstract val
+}
