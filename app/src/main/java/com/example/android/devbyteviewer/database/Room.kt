@@ -17,6 +17,8 @@
 
 package com.example.android.devbyteviewer.database
 
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -29,7 +31,20 @@ interface VideoDao {
     fun InsertAll(vararg videos: DatabaseVideo)
 }
 
-@Database(entities = "[DatabaseVideo]", version = 1)
+@Database(entities = arrayOf(DatabaseVideo::class), version = 1)
 abstract class VideosDatabase: RoomDatabase() {
-    abstract val
+    abstract val videoDao : VideoDao
+
+    companion object {
+        private lateinit var _INSTANCE: VideosDatabase
+        fun getDatabase(context: Context): VideosDatabase {
+            synchronized(this) {
+                if (!::_INSTANCE.isInitialized) {
+                    _INSTANCE = Room.databaseBuilder(context.applicationContext, VideosDatabase::class.java,"videos.db")
+                        .build()
+                }
+                return _INSTANCE
+            }
+        }
+    }
 }
