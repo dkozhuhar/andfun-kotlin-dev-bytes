@@ -53,6 +53,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$version_appcompat"
     implementation "androidx.fragment:fragment:$version_fragment"
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
 
     // Android KTX
     implementation "androidx.core:core-ktx:$version_core"
